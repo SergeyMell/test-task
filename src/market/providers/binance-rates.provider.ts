@@ -1,18 +1,10 @@
 export class BinanceRatesProvider {
+  private BASE_API_URL = 'https://fake-api.binance.com';
 
-  private client: any;
-
-  constructor(API_KEY: string, API_SECRET: string) {
-    this.initSDK(API_KEY, API_SECRET);
-  }
-
-  async exchangeRates(pair: string): Promise<string> {
-    // this.client.exchangeInfo(pair);
-    return '0.18';
-  }
-
-  private initSDK(API_KEY: string, API_SECRET: string) {
-    // TODO: implement Binance SDK
-    // this.client = new Binance.Spot();
+  async getTickers(pair: string): Promise<string> {
+    const url = `${this.BASE_API_URL}/api/v3/ticker/price?symbol=${pair}`;
+    return fetch(url)
+      .then((res) => res.json() as unknown as { price: string })
+      .then((data) => data.price);
   }
 }

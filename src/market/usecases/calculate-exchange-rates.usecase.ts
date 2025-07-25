@@ -1,8 +1,15 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
+import { BinanceRatesProvider } from '../providers/binance-rates.provider';
 
 @Injectable()
 export class CalculateExchangeRatesUsecase {
-  async execute() {
-    throw new Error("Method not implemented.");
+
+  constructor(
+    private readonly ratesProvider: BinanceRatesProvider
+  ) {}
+
+  async execute(assetFrom: string, assetTo: string) {
+    const pair = `${assetFrom}${assetTo}`;
+    return this.ratesProvider.getTickers(pair);
   }
 }
