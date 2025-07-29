@@ -1,4 +1,4 @@
-export class BinanceRatesProvider {
+export class KrakenRatesProvider {
   private BASE_API_URL = 'https://fake-kraken-api.binance.com';
 
   async getExchangeRate(pair: string): Promise<string> {
